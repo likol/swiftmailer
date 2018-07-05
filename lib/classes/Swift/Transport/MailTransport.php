@@ -294,4 +294,11 @@ class Swift_Transport_MailTransport implements Swift_Transport
 
         return !empty($extraParams) ? $extraParams : null;
     }
+    
+    private function escapeshellarg($input)
+    {
+        $input = str_replace('\'', '\\\'', $input);
+
+        return '\''.$input.'\'';
+    }
 }
