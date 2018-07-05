@@ -255,11 +255,6 @@ class Swift_Transport_MailTransport implements Swift_Transport
      */
     private function _isShellSafe($string)
     {
-        // Future-proof
-        if (escapeshellcmd($string) !== $string || !in_array(escapeshellarg($string), array("'$string'", "\"$string\""))) {
-            return false;
-        }
-
         $length = strlen($string);
         for ($i = 0; $i < $length; ++$i) {
             $c = $string[$i];
@@ -293,12 +288,5 @@ class Swift_Transport_MailTransport implements Swift_Transport
         }
 
         return !empty($extraParams) ? $extraParams : null;
-    }
-    
-    private function escapeshellarg($input)
-    {
-        $input = str_replace('\'', '\\\'', $input);
-
-        return '\''.$input.'\'';
     }
 }
